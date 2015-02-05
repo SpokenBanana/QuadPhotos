@@ -16,15 +16,13 @@ import javax.swing.JPanel;
 */
 public class QuadGame extends JPanel  implements MouseListener, MouseMotionListener, Runnable{
 	
-	private final boolean circled, dragEnabled;
+	private final boolean dragEnabled;
 	private final BufferedImage image;
 	private ArrayList<QuadTree> trees;
-	QuadTree last;
-	
+
 	public QuadGame(BufferedImage img, boolean circle, boolean drag) {
 		dragEnabled = drag;
 		image = img;
-		circled = circle;
 		trees = new ArrayList<>();
 		setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
 		setFocusable(true);

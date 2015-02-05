@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.stream.Collectors;
 import javax.swing.JPanel;
 
 /*
@@ -86,7 +87,7 @@ public class QuadPhotos extends JPanel implements Runnable {
 			});
 			tree.split();
 			ArrayList<QuadTree> next = tree.getChildren();
-			next.forEach(child -> child.determineError());
+			next.forEach(QuadTree::determineError);
 			priority.addAll(next);
 		}
 		else {
@@ -96,8 +97,7 @@ public class QuadPhotos extends JPanel implements Runnable {
 				ArrayList<QuadTree> next = quad.getChildren();
 				// sometime's we try to split a region that's too small, so it won't split
 				if (next != null) {
-					next.forEach(child -> child.determineError());
-					priority.addAll(next);
+					priority.addAll(next.stream().filter(QuadTree::determineError).collect(Collectors.toList()));
 				}
 			}
 		}

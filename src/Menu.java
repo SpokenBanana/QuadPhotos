@@ -1,7 +1,6 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -125,9 +124,7 @@ public class Menu extends JPanel {
 
 		// *** Action Listeners ***
 
-		priority.addActionListener((ActionEvent e) ->{
-			iterations.setText("3000");
-		});
+		priority.addActionListener((ActionEvent e) -> iterations.setText("3000"));
 		
 		
 		list.addActionListener((ActionEvent e) ->{

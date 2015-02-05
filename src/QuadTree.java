@@ -16,21 +16,15 @@ public class QuadTree extends Rectangle {
 	private BufferedImage image;
 	private boolean circled;
 	private Color color;
-	private int threshHold, error;
+	private int error;
 	
 	public QuadTree(int x, int y, int width, int height, BufferedImage img, boolean circle) {
 		super(x, y, width, height);
 		image = img;
 		circled = circle;
-		threshHold = 80;
 		setAverageColor();
 	}
-	
-	public QuadTree(int x, int y, int width, int height,BufferedImage img, boolean circle, int thresh) {
-		this(x, y, width, height, img, circle);
-		threshHold = thresh < 80 ? 80 : thresh;
-	}
-	
+
 	/*
 		We go through each color in the region, and save each "unique" color. We
 		define a color "unique" if the difference of the color and any color
@@ -46,19 +40,20 @@ public class QuadTree extends Rectangle {
 		for (int i = y; i < y + height; i++) {
 			for(int j = x; j  < x + width; j++) {
 				Color c = new Color(image.getRGB(j, i));
+				err += getTotalDifference(c, color);
 				if (colors.isEmpty())
 					colors.add(c);
 				else {
-					if (!colors.stream().anyMatch(current -> getTotalDifference(current, c) < threshHold)) {
+					if (!colors.stream().anyMatch(current -> getTotalDifference(current, c) < 70)) {
 						colors.add(c);
-						err += getTotalDifference(c, color);
 					}
 				}
 			}
 		}
-		
-		// the closest aglorithm I can think of to give a sort of accurate error ranking, works well
-		error = colors.size() * err;
+
+		err /= width * height;
+		// the closest algorithm I can think of to give a sort of accurate error ranking, works well
+		error = colors.size() * err * width * height;
 		
 		return width / 2 >= 2 && height / 2 >= 2 && colors.size() >= 2;
 	}
