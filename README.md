@@ -1,7 +1,7 @@
 # QuadPhotos
 A program that splits an image into quadrants in a specific way. Inspired from https://github.com/fogleman/Quads I decided to try to make my own version to see what I can learn from it
 
-Web Demo! photoquads.appspot.com
+Web Demo! http://photoquads.appspot.com/
 
 I used a different algorithm than his, which causes my pictures to come out a little too detailed in some places, but 
 the outcome looks very close to Mr. Fogleman's great work, it works well, and I am happy with it :)
